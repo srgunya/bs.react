@@ -1,0 +1,23 @@
+.headerBut {
+	display: flex;
+	position: absolute;
+	right: 4.2rem;
+}
+.headerBut__button {
+	width: 5rem;
+	height: 5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: transparent;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	border-radius: 0.4rem;
+	&:hover {
+		background-color: $primary-5;
+	}
+}
+.headerBut__img {
+	width: 2.4rem;
+	height: 2.4rem;
+}

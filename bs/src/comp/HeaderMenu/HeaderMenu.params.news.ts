@@ -1,0 +1,52 @@
+export const news = {
+	ul1: [
+		{ to: '', text: 'Все бренды' },
+		{ to: '', text: 'adidas Originals' },
+		{ to: '', text: 'C.P. Company' },
+		{ to: '', text: 'Calvin Klein Jeans' },
+		{ to: '', text: 'CASIO' },
+		{ to: '', text: 'Champion Reverse Weave' },
+		{ to: '', text: 'Levis' },
+		{ to: '', text: 'Nike' },
+		{ to: '', text: 'Polo Ralph Lauren' },
+		{ to: '', text: 'Ripndip' },
+		{ to: '', text: 'The North Face' },
+		{ to: '', text: 'thisisneverthat' },
+		{ to: '', text: 'Tommy Jeans' },
+		{ to: '', text: 'Y-3' },
+	],
+	ul2: [
+		{ to: '', text: 'Все категории' },
+		{ to: '', text: 'Кеды' },
+		{ to: '', text: 'Кроссовки' },
+		{ to: '', text: 'Куртки' },
+		{ to: '', text: 'Брюки' },
+		{ to: '', text: 'Джинсы' },
+		{ to: '', text: 'Лонгсливы' },
+		{ to: '', text: 'Рубашки' },
+		{ to: '', text: 'Свитера' },
+		{ to: '', text: 'Толстовки' },
+		{ to: '', text: 'Футболки' },
+		{ to: '', text: 'Наручные часы' },
+		{ to: '', text: 'Рюкзаки' },
+		{ to: '', text: 'Сумки' },
+	],
+	img: [
+		{
+			text: 'Saucony',
+			img: '/img/header-menu/saucony.jpg',
+		},
+		{
+			text: 'Reebok',
+			img: '/img/header-menu/reebok.jpg',
+		},
+		{
+			text: 'Alpha Indistries',
+			img: '/img/header-menu/alpha.jpg',
+		},
+		{
+			text: 'C.P. Company',
+			img: '/img/header-menu/cp_company.jpg',
+		},
+	],
+}
