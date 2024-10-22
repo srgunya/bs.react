@@ -37,7 +37,7 @@ export function HeaderMenuBlock({
 				{ul.map((el, i, arr) => (
 					<li
 						key={el.text}
-						className={cn(styles['menuNav__li'], {
+						className={cn('menuNav__li', {
 							[styles['menuNav__li_capital']]: arr.length === 14 && i === 0,
 							[styles['menuNav__li_brand']]: apperance === 'Бренды' && arr.length < 14 && i === 0,
 						})}
@@ -65,7 +65,9 @@ export function HeaderMenuBlock({
 					[styles['menuImg__a_sex']]: apperance === 'Мужское' || apperance === 'Женское',
 				})}
 			>
-				<img src={i.img} className={styles['menuImg__img']} />
+				<picture className={styles['menuImg__img']}>
+					<img src={i.img} className={styles['menuImg__img']} />
+				</picture>
 				<span className={styles['menuImg__span']}>{i.text}</span>
 			</Link>
 		))

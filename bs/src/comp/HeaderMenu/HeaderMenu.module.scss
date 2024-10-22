@@ -5,6 +5,8 @@
 	transition: top 0.2s linear, opacity 0.2s linear;
 	opacity: 0;
 	top: 9rem;
+	background-color: $white;
+	z-index: 1;
 }
 .menuWrap_open {
 	opacity: 1;
