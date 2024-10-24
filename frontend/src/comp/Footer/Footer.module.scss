@@ -1,18 +1,22 @@
 .footer {
 	display: flex;
 	flex-flow: column nowrap;
-	position: absolute;
+	position: relative;
 	bottom: 0;
 	width: 100%;
 }
 
 //FooterTop
 .footerTop {
+	position: relative;
+	width: 100%;
 	border-top: 1px solid $primary-5;
 	padding: 3.6rem 4.2rem 8.1rem;
 	display: flex;
 	flex-flow: row nowrap;
 	gap: 1rem;
+	max-width: 148.8rem;
+	margin: 0 auto;
 }
 .footerTop__ul {
 	flex: 1;
@@ -77,6 +81,9 @@
 	flex-flow: row nowrap;
 	justify-content: center;
 	gap: 3rem;
+	max-width: 148.8rem;
+	margin: 0 auto;
+	padding: 0 4.2rem;
 	margin-bottom: 1.6rem;
 }
 .footerCopy {
@@ -84,6 +91,9 @@
 	flex-flow: row nowrap;
 	justify-content: center;
 	gap: 3rem;
+	max-width: 148.8rem;
+	margin: 0 auto;
+	padding: 0 4.2rem;
 }
 .footerCopy__item {
 	font-size: 1.2rem;

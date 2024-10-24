@@ -11,7 +11,7 @@ export function Header() {
 		console.log(q)
 	}
 	return (
-		<header className='header'>
+		<header className={styles['header']}>
 			<div className={styles['headerSale']}>
 				<Link to='' className={styles['headerSale__a']} onClick={qwe}>
 					SALE
