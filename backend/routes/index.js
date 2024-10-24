@@ -1,6 +1,10 @@
 const express = require('express')
 const router = express.Router()
 
-router.get('/', (req, res) => res.end('Hello world'))
+const getCount = require('./getCount')
+const getById = require('./getById')
+
+router.use('/', getCount)
+router.use('/', getById)
 
 module.exports = router

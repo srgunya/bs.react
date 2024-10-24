@@ -1,3 +1,10 @@
+.header {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 2;
+	background-color: white;
+}
 .headerSale {
 	width: 100%;
 	background-color: $red;
@@ -22,7 +29,8 @@
 	display: flex;
 	flex-flow: row wrap;
 	align-items: center;
-	position: relative;
+	max-width: 148.8rem;
+	margin: 0 auto;
 }
 .HeaderLogo {
 	display: flex;

@@ -8,11 +8,12 @@ function load() {
 	loadIndex('item', 'bs_item')
 	loadIndex('logo', 'bs_logo')
 }
+
 function loadIndex(name_mysql, name_elk) {
 	let mas_for_elk = []
 	let query = `SELECT * FROM ${name_mysql}`
-	bs.query(query, (err, result, field) => {
-		result.forEach(el => {
+	bs.query(query, async (err, result, field) => {
+		await result.forEach(el => {
 			mas_for_elk.push({
 				index: {
 					_index: `${name_elk}`,
@@ -21,7 +22,7 @@ function loadIndex(name_mysql, name_elk) {
 			})
 			mas_for_elk.push(el)
 		})
-		const response = client.bulk({
+		const response = await client.bulk({
 			body: mas_for_elk,
 		})
 		if (!response.err) {
@@ -29,8 +30,8 @@ function loadIndex(name_mysql, name_elk) {
 		}
 	})
 }
-function createLogoIndex() {
-	return client.indices.create({
+async function createLogoIndex() {
+	return await client.indices.create({
 		index: 'bs_logo',
 		body: {
 			mappings: {
@@ -55,8 +56,8 @@ function createLogoIndex() {
 		},
 	})
 }
-function createItemIndex() {
-	return client.indices.create({
+async function createItemIndex() {
+	return await client.indices.create({
 		index: 'bs_item',
 		body: {
 			mappings: {
