@@ -1,4 +1,6 @@
+import { IndexBanner } from '../../comp/Index__banner/IndexBanner'
 import { IndexSex } from '../../comp/Index__sex/IndexSex'
+import { IndexSliderItem } from '../../comp/Index__slider_item/IndexSliderItem'
 import { IndexSliderLogo } from '../../comp/Index__slider_logo/IndexSliderLogo'
 import styles from './Index.module.scss'
 
@@ -6,7 +8,9 @@ export function Index() {
 	return (
 		<div className={styles['Index']}>
 			<IndexSex />
-			<IndexSliderLogo />
+			<IndexSliderLogo name='Популярные бренды' />
+			<IndexBanner />
+			<IndexSliderItem name='Новые поступления' />
 		</div>
 	)
 }

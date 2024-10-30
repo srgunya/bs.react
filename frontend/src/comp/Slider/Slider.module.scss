@@ -3,9 +3,8 @@
 	flex-flow: column nowrap;
 	flex-direction: column-reverse;
 }
-.indexSlider__slide {
-	height: auto !important;
-	user-select: none;
+.sliderWrapper {
+	transition-timing-function: ease-in-out !important;
 }
 .sliderNav {
 	display: flex;

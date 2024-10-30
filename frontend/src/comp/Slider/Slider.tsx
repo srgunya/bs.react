@@ -1,28 +1,18 @@
-import { Link } from 'react-router-dom'
+import cn from 'classnames'
+import 'swiper/css'
 import { Navigation, Pagination } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import { Swiper } from 'swiper/react'
 import styles from './Slider.module.scss'
 import { SliderProps } from './Slider.props'
 
-export function Slider({ logos, custom_styles }: SliderProps) {
-	function logoSlider() {
-		return logos.map(el => (
-			<SwiperSlide key={el.id} className={styles['indexSlider__slide']}>
-				<Link to=''>
-					<picture className={custom_styles['indexSlider__img']}>
-						<img src={el.logo} alt='' className={custom_styles['indexSlider__img']} />
-					</picture>
-				</Link>
-			</SwiperSlide>
-		))
-	}
-
+export function Slider({ className, children, slidesPerView, slidesPerGroup, name }: SliderProps) {
 	return (
 		<Swiper
 			spaceBetween={24}
-			slidesPerView={10}
-			slidesPerGroup={10}
-			className={styles['indexSlider']}
+			slidesPerView={slidesPerView}
+			slidesPerGroup={slidesPerGroup}
+			className={cn(className, styles['indexSlider'])}
+			wrapperClass={styles['sliderWrapper']}
 			pagination={{
 				el: '.' + styles['sliderNav__pagi'],
 				type: 'fraction',
@@ -35,7 +25,7 @@ export function Slider({ logos, custom_styles }: SliderProps) {
 			modules={[Pagination, Navigation]}
 		>
 			<div className={styles['sliderNav']}>
-				<div className={styles['sliderNav__name']}>Популярные бренды</div>
+				<div className={styles['sliderNav__name']}>{name}</div>
 				<div className={styles['sliderNav__pagi']}></div>
 				<button className={styles['sliderNav__prev']}>
 					<img src='/img/slider/left.png' alt='' className={styles['sliderNav__img']} />
@@ -44,7 +34,7 @@ export function Slider({ logos, custom_styles }: SliderProps) {
 					<img src='/img/slider/right.png' alt='' className={styles['sliderNav__img']} />
 				</button>
 			</div>
-			{logos && logoSlider()}
+			{children}
 		</Swiper>
 	)
 }

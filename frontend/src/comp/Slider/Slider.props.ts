@@ -1,6 +1,7 @@
-import { IndexSliderLogoProps } from '../Index__slider_logo/IndexSliderLogo.props'
+import { HTMLAttributes } from 'react'
 
-export interface SliderProps {
-	custom_styles: CSSModuleClasses
-	logos: IndexSliderLogoProps[]
+export interface SliderProps extends HTMLAttributes<'div'> {
+	slidesPerView: number
+	slidesPerGroup: number
+	name: string
 }
