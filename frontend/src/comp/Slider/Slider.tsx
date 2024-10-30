@@ -20,7 +20,7 @@ export function Slider({ className, children, slidesPerView, slidesPerGroup, nam
 			navigation={{
 				nextEl: '.' + styles['sliderNav__next'],
 				prevEl: '.' + styles['sliderNav__prev'],
-				disabledClass: styles['sliderNav__prev_disabled'],
+				disabledClass: styles['sliderNav__button_disabled'],
 			}}
 			modules={[Pagination, Navigation]}
 		>

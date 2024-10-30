@@ -4,16 +4,10 @@ import { HeaderNav } from '../Header__nav/HeaderNav'
 import styles from './Header.module.scss'
 
 export function Header() {
-	const qwe = async () => {
-		const res = await fetch('http://localhost:8080/')
-		let q: string = ''
-		q = await res.text()
-		console.log(q)
-	}
 	return (
 		<header className={styles['header']}>
 			<div className={styles['headerSale']}>
-				<Link to='' className={styles['headerSale__a']} onClick={qwe}>
+				<Link to='' className={styles['headerSale__a']}>
 					SALE
 				</Link>
 			</div>
