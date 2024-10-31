@@ -1,15 +1,18 @@
+import { lazy, Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Footer } from '../../comp/Footer/Footer'
 import { Header } from '../../comp/Header/Header'
-import { HeaderMenu } from '../../comp/HeaderMenu/HeaderMenu'
 import { HeaderContextProvider } from '../../context/header.context'
 
 export function Layout() {
+	const HeaderMenu = lazy(() => import('../../comp/HeaderMenu/HeaderMenu'))
 	return (
 		<>
 			<HeaderContextProvider>
 				<Header />
-				<HeaderMenu />
+				<Suspense>
+					<HeaderMenu />
+				</Suspense>
 			</HeaderContextProvider>
 			<Outlet />
 			<Footer />

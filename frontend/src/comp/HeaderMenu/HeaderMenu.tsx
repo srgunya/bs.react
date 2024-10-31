@@ -10,7 +10,7 @@ import { news } from './HeaderMenu.params.news'
 import { sale } from './HeaderMenu.params.sale'
 import { wooman } from './HeaderMenu.params.wooman'
 
-export function HeaderMenu() {
+export default function HeaderMenu() {
 	const { menuActive, setMenuActive } = useContext(HeaderContext)
 
 	return (
