@@ -18,14 +18,14 @@ export function HeaderMenuBlock({
 	useEffect(() => {
 		let timerId: number
 		if (menuActive === apperance) {
-			menuNav.current?.classList.add(styles['menu_active'])
+			menuNav.current?.classList.add(styles['menu_active'], 'menu_active')
 		} else {
 			if (menuActive === '') {
 				timerId = setTimeout(() => {
-					menuNav.current?.classList.remove(styles['menu_active'])
+					menuNav.current?.classList.remove(styles['menu_active'], 'menu_active')
 				}, 200)
 			} else {
-				menuNav.current?.classList.remove(styles['menu_active'])
+				menuNav.current?.classList.remove(styles['menu_active'], 'menu_active')
 			}
 		}
 		return () => clearTimeout(timerId)

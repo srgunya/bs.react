@@ -1,4 +1,6 @@
 import cn from 'classnames'
+import { useContext } from 'react'
+import { HeaderContext } from '../../context/header.context'
 import { HeaderMenuBlock } from '../HeaderMenu__block/HeaderMenuBlock'
 import styles from './HeaderMenu.module.scss'
 import { access } from './HeaderMenu.params.access'
@@ -7,14 +9,16 @@ import { man } from './HeaderMenu.params.man'
 import { news } from './HeaderMenu.params.news'
 import { sale } from './HeaderMenu.params.sale'
 import { wooman } from './HeaderMenu.params.wooman'
-import { HeaderMenuProps } from './HeaderMenu.props'
 
-export function HeaderMenu({ menuActive }: HeaderMenuProps) {
+export function HeaderMenu() {
+	const { menuActive, setMenuActive } = useContext(HeaderContext)
+
 	return (
 		<div
 			className={cn(styles['menuWrap'], {
 				[styles['menuWrap_open']]: menuActive != '',
 			})}
+			onMouseLeave={() => setMenuActive('')}
 		>
 			<HeaderMenuBlock
 				ul1={news.ul1}
