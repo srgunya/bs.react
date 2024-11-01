@@ -1,6 +1,7 @@
 import cn from 'classnames'
 import { ReactNode, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { PREFIX } from '../../helpers/API'
 import styles from './HeaderMenuBlock.module.scss'
 import { HeaderMenuBlockProps } from './HeaderMenuBlock.props'
 
@@ -66,7 +67,7 @@ export function HeaderMenuBlock({
 				})}
 			>
 				<picture className={styles['menuImg__img']}>
-					<img src={i.img} className={styles['menuImg__img']} />
+					<img src={PREFIX + i.img} className={styles['menuImg__img']} />
 				</picture>
 				<span className={styles['menuImg__span']}>{i.text}</span>
 			</Link>

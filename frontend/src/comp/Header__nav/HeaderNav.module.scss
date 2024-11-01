@@ -3,11 +3,9 @@
 }
 .headerNav__ul {
 	display: flex;
-	align-items: center;
 	height: 100%;
 }
 .headerNav__li {
-	height: 100%;
 	transition: background-color 0.3s ease;
 }
 .headerNav__li_active {
@@ -15,9 +13,7 @@
 }
 .headerNav__a {
 	display: flex;
-	width: 100%;
 	height: 100%;
 	align-items: center;
 	padding: 0 2rem;
-	cursor: pointer;
 }

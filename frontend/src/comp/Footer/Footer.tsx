@@ -55,8 +55,8 @@ export function Footer() {
 				<ul className={styles['footerIcons']}>
 					{icons.map((el, i) => (
 						<li key={i}>
-							<picture>
-								<img src={el.img} alt='' />
+							<picture className={styles['footerIcons__img']}>
+								<img src={el.img} alt='' className={styles['footerIcons__img']} />
 							</picture>
 						</li>
 					))}

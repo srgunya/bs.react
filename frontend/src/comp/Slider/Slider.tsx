@@ -24,7 +24,11 @@ export function Slider({ className, children, slidesPerView, slidesPerGroup, nam
 			}}
 			modules={[Pagination, Navigation]}
 		>
-			<div className={styles['sliderNav']}>
+			<div
+				className={cn(styles['sliderNav'], {
+					[styles['sliderNav_item']]: name != 'Популярные бренды',
+				})}
+			>
 				<div className={styles['sliderNav__name']}>{name}</div>
 				<div className={styles['sliderNav__pagi']}></div>
 				<button className={styles['sliderNav__prev']}>

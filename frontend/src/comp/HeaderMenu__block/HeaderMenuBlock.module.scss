@@ -1,10 +1,8 @@
 .menu {
 	display: none;
-	width: 100%;
 	padding: 2.4rem 4.2rem;
 	max-width: 148.8rem;
 	margin: 0 auto;
-	background-color: white;
 }
 .menu_active {
 	display: flex;
@@ -30,7 +28,7 @@
 	line-height: 3.2rem;
 	white-space: nowrap;
 	display: inline-flex;
-	flex-flow: column;
+	flex-flow: column nowrap;
 
 	&::after {
 		content: '';
@@ -75,7 +73,7 @@
 }
 .menuImg__a {
 	display: flex;
-	flex-flow: column;
+	flex-flow: column nowrap;
 	align-items: center;
 	transition: opacity 0.3s ease;
 	width: 50%;
@@ -102,7 +100,7 @@
 	flex: 3;
 }
 .menuImg_brand {
-	flex-flow: column;
+	flex-flow: column nowrap;
 }
 .menuImg__a_brand {
 	width: 100%;

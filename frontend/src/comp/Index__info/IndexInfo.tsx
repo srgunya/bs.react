@@ -1,5 +1,6 @@
 import cn from 'classnames'
 import { Link } from 'react-router-dom'
+import { PREFIX } from '../../helpers/API'
 import styles from './IndexInfo.module.scss'
 import { info } from './IndexInfo.params'
 
@@ -15,7 +16,7 @@ export function IndexInfo() {
 				>
 					<Link to={el.to} className={styles['IndexInfo__link']}>
 						<picture className={styles['IndexInfo__img']}>
-							<img src={el.img} alt='' className={styles['IndexInfo__img']} />
+							<img src={PREFIX + el.img} alt='' className={styles['IndexInfo__img']} />
 						</picture>
 					</Link>
 					<div className={styles['IndexInfo__block']}>

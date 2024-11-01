@@ -25,7 +25,6 @@
 	object-fit: cover;
 }
 .IndexInfo__block {
-	flex: 1;
 	padding: 2rem 1rem 0;
 	max-height: 11.39rem;
 }
@@ -38,7 +37,7 @@
 	font-weight: normal;
 	margin: 0;
 	display: inline-flex;
-	flex-flow: column;
+	flex-flow: column nowrap;
 	transition: color 0.3s ease;
 	&::after {
 		content: '';

@@ -13,13 +13,8 @@ export function Header() {
 			</div>
 			<div className={styles['headerCont']}>
 				<Link to='/' className={styles['HeaderLogo']}>
-					<picture>
-						<source
-							srcSet='/img/header/Logo-big.svg'
-							media={'(min-width: 1000px)'}
-							className={styles['HeaderLogo__img']}
-						/>
-						<img src='/public/img/header/Logo-sm.svg' className={styles['HeaderLogo__img']} />
+					<picture className={styles['HeaderLogo__img']}>
+						<img src='/img/header/logo.svg' className={styles['HeaderLogo__img']} />
 					</picture>
 				</Link>
 				<HeaderNav />

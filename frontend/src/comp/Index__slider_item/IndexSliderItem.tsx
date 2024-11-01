@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { SwiperSlide } from 'swiper/react'
+import { PREFIX } from '../../helpers/API'
 import { useDataSlider } from '../../hooks/use-dataSlider.hook'
 import { Slider } from '../Slider/Slider'
 import styles from './IndexSliderItem.module.scss'
@@ -13,7 +14,7 @@ export function IndexSliderItem({ name }: IndexSliderItemProps) {
 			<SwiperSlide key={el.id} className={styles['indexSlider__slide']}>
 				<Link to='' className={styles['indexSlider__link']}>
 					<picture>
-						<img src={el.img} alt='' className={styles['indexSlider__img']} />
+						<img src={PREFIX + el.img} alt='' className={styles['indexSlider__img']} />
 					</picture>
 					<span className={styles['indexSlider__brand']}>{el.brand}</span>
 					<span className={styles['indexSlider__type']}>{el.type}</span>
