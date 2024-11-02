@@ -16,3 +16,10 @@ li {
 a {
 	text-decoration: none;
 }
+.main {
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+.main_isLoad {
+	opacity: 1;
+}

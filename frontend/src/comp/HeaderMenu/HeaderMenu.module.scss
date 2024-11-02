@@ -5,9 +5,9 @@
 	position: fixed;
 	z-index: 2;
 	left: 0;
-	top: 11.7rem;
+	top: 12rem;
 	opacity: 0;
-	transition: top 0.15s ease-in-out, opacity 0.15s ease-in-out;
+	transition: top 0.2s ease, opacity 0.2s ease;
 }
 .menuWrap_open {
 	opacity: 1;

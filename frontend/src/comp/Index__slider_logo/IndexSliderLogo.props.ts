@@ -5,4 +5,5 @@ export interface logoData {
 }
 export interface IndexSliderLogoProps {
 	name: string
+	logos: logoData[]
 }

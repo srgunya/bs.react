@@ -24,7 +24,7 @@ export function HeaderMenuBlock({
 			if (menuActive === '') {
 				timerId = setTimeout(() => {
 					menuNav.current?.classList.remove(styles['menu_active'], 'menu_active')
-				}, 200)
+				}, 250)
 			} else {
 				menuNav.current?.classList.remove(styles['menu_active'], 'menu_active')
 			}

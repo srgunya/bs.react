@@ -1,14 +1,11 @@
 import { Link } from 'react-router-dom'
 import { SwiperSlide } from 'swiper/react'
 import { PREFIX } from '../../helpers/API'
-import { useDataSlider } from '../../hooks/use-dataSlider.hook'
 import { Slider } from '../Slider/Slider'
 import styles from './IndexSliderItem.module.scss'
-import { IndexSliderItemProps, itemData } from './IndexSliderItem.props'
+import { IndexSliderItemProps } from './IndexSliderItem.props'
 
-export function IndexSliderItem({ name }: IndexSliderItemProps) {
-	const [items] = useDataSlider<itemData>('/itemCount', '/getItemById')
-
+export function IndexSliderItem({ items, name }: IndexSliderItemProps) {
 	function itemSlider() {
 		return items.map(el => (
 			<SwiperSlide key={el.id} className={styles['indexSlider__slide']}>

@@ -16,4 +16,5 @@ export interface itemData {
 }
 export interface IndexSliderItemProps {
 	name: string
+	items: itemData[]
 }
