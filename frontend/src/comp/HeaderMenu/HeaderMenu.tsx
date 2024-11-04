@@ -8,13 +8,13 @@ import { brand } from './HeaderMenu.params.brand'
 import { man } from './HeaderMenu.params.man'
 import { news } from './HeaderMenu.params.news'
 import { sale } from './HeaderMenu.params.sale'
-import { wooman } from './HeaderMenu.params.wooman'
+import { woman } from './HeaderMenu.params.woman'
 
 export default function HeaderMenu() {
 	const { menuActive, setMenuActive } = useContext(HeaderContext)
 
 	return (
-		<div
+		<nav
 			className={cn(styles['menuWrap'], {
 				[styles['menuWrap_open']]: menuActive != '',
 			})}
@@ -44,9 +44,9 @@ export default function HeaderMenu() {
 				menuActive={menuActive}
 			/>
 			<HeaderMenuBlock
-				ul1={wooman.ul1}
-				ul2={wooman.ul2}
-				img={wooman.img}
+				ul1={woman.ul1}
+				ul2={woman.ul2}
+				img={woman.img}
 				apperance='Женское'
 				menuActive={menuActive}
 			/>
@@ -64,6 +64,6 @@ export default function HeaderMenu() {
 				apperance='Скидки'
 				menuActive={menuActive}
 			/>
-		</div>
+		</nav>
 	)
 }

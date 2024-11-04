@@ -16,6 +16,7 @@ export interface HeaderMenuBlockProps {
 		text: string
 	}[]
 	img: {
+		to: string
 		text: string
 		img: string
 	}[]

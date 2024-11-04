@@ -59,7 +59,7 @@ export function HeaderMenuBlock({
 	function createImg(): ReactNode {
 		return img.map(i => (
 			<Link
-				to=''
+				to={i.to}
 				key={i.text}
 				className={cn(styles['menuImg__a'], {
 					[styles['menuImg__a_brand']]: apperance === 'Бренды',

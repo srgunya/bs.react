@@ -8,7 +8,7 @@ import { IndexSliderItem } from '../../comp/Index__slider_item/IndexSliderItem'
 import { itemData } from '../../comp/Index__slider_item/IndexSliderItem.props'
 import { IndexSliderLogo } from '../../comp/Index__slider_logo/IndexSliderLogo'
 import { logoData } from '../../comp/Index__slider_logo/IndexSliderLogo.props'
-import styles from './Index.module.scss'
+import { pageIsLoad } from '../../helpers/pageIsLoad'
 
 export function Index() {
 	const mainRef = useRef<HTMLDivElement>(null)
@@ -19,16 +19,7 @@ export function Index() {
 	}
 
 	useEffect(() => {
-		setTimeout(() => {
-			window.scrollTo(0, Number(sessionStorage.getItem('scrollPos')))
-		}, 50)
-		setTimeout(() => {
-			mainRef.current?.classList.add('main_isLoad')
-			sessionStorage.removeItem('scrollPos')
-		}, 100)
-		window.onbeforeunload = () => {
-			sessionStorage.setItem('scrollPos', `${window.scrollY}`)
-		}
+		pageIsLoad(mainRef)
 	}, [])
 
 	return (
@@ -37,7 +28,7 @@ export function Index() {
 				{({ logos, news, pop }: { logos: logoData[]; news: itemData[]; pop: itemData[] }) => {
 					return (
 						<div className={'main'} ref={mainRef}>
-							<div className={styles['Index']}>
+							<div className={'cont'}>
 								<IndexSex />
 								<IndexSliderLogo name='Популярные бренды' logos={logos} />
 								<IndexBanner />

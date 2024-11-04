@@ -36,16 +36,11 @@ async function createLogoIndex() {
 		body: {
 			mappings: {
 				properties: {
-					all_prop: {
-						type: 'text',
-					},
 					id: {
 						type: 'keyword',
-						copy_to: 'all_prop',
 					},
 					brand: {
 						type: 'keyword',
-						copy_to: 'all_prop',
 					},
 					logo: {
 						type: 'keyword',
@@ -60,48 +55,71 @@ async function createItemIndex() {
 	return await client.indices.create({
 		index: 'bs_item',
 		body: {
+			settings: {
+				analysis: {
+					char_filter: {
+						my_char_filter: {
+							type: 'mapping',
+							mappings: ['. =>', '- => \\u0020', '& =>', '\\u0020&\\u0020 => \\u0020'],
+						},
+					},
+					analyzer: {
+						all_prop_analyzer: {
+							type: 'custom',
+							char_filter: ['my_char_filter'],
+							filter: ['lowercase'],
+							tokenizer: 'standard',
+						},
+						brand_analyzer: {
+							type: 'custom',
+							char_filter: ['my_char_filter'],
+							filter: ['lowercase'],
+							tokenizer: 'keyword',
+						},
+					},
+				},
+			},
 			mappings: {
 				properties: {
 					all_prop: {
 						type: 'text',
+						analyzer: 'all_prop_analyzer',
+					},
+					list_prop: {
+						type: 'text',
+						analyzer: 'all_prop_analyzer',
 					},
 					id: {
 						type: 'keyword',
 						copy_to: 'all_prop',
 					},
 					brand: {
-						type: 'keyword',
-						copy_to: 'all_prop',
-					},
-					sale: {
-						type: 'keyword',
-						index: false,
-					},
-					img: {
-						type: 'keyword',
-						index: false,
+						type: 'text',
+						copy_to: ['all_prop', 'list_prop'],
+						analyzer: 'brand_analyzer',
+						fields: {
+							keyword: {
+								type: 'keyword',
+							},
+						},
 					},
 					class: {
 						type: 'keyword',
-						copy_to: 'all_prop',
+						copy_to: ['all_prop', 'list_prop'],
+					},
+					category: {
+						type: 'keyword',
+						copy_to: ['all_prop', 'list_prop'],
 					},
 					type: {
 						type: 'keyword',
-						copy_to: 'all_prop',
-					},
-					model: {
-						type: 'keyword',
-						copy_to: 'all_prop',
-					},
-					price: {
-						type: 'keyword',
-						index: false,
+						copy_to: ['all_prop', 'list_prop'],
 					},
 					sex: {
 						type: 'keyword',
-						copy_to: 'all_prop',
+						copy_to: ['all_prop', 'list_prop'],
 					},
-					category: {
+					model: {
 						type: 'keyword',
 						copy_to: 'all_prop',
 					},
@@ -113,13 +131,25 @@ async function createItemIndex() {
 						type: 'keyword',
 						copy_to: 'all_prop',
 					},
+					info: {
+						type: 'keyword',
+						index: false,
+					},
+					sale: {
+						type: 'keyword',
+						index: false,
+					},
+					img: {
+						type: 'keyword',
+						index: false,
+					},
 					photo: {
 						type: 'keyword',
 						index: false,
 					},
-					info: {
+					price: {
 						type: 'keyword',
-						copy_to: 'all_prop',
+						index: false,
 					},
 				},
 			},

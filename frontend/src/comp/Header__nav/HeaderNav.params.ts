@@ -1,26 +1,26 @@
 export const header_nav = [
 	{
-		to: '',
+		to: '/new',
 		text: 'Новинки',
 	},
 	{
-		to: '',
+		to: '/brandlist',
 		text: 'Бренды',
 	},
 	{
-		to: '',
+		to: '/muzhskoe',
 		text: 'Мужское',
 	},
 	{
-		to: '',
+		to: '/zhenskoe',
 		text: 'Женское',
 	},
 	{
-		to: '',
+		to: '/aksessuary',
 		text: 'Аксессуары',
 	},
 	{
-		to: '',
+		to: '/sale',
 		text: 'Скидки',
 	},
 ]
