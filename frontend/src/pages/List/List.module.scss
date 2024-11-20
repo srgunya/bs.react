@@ -1,0 +1,8 @@
+.listWrap {
+	background-color: $background;
+}
+.listHeader {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+}

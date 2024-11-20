@@ -2,9 +2,11 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Footer } from '../../comp/Footer/Footer'
 import { itemData } from '../../comp/Index__slider_item/IndexSliderItem.props'
-import { ListNav } from '../../comp/List_nav/ListNav'
+import { ListNav } from '../../comp/List__nav/ListNav'
+import { ListSort } from '../../comp/List__sort/ListSort'
 import { pageIsLoad } from '../../helpers/pageIsLoad'
 import { getItems, isTranslit } from '../../loaders/getDataList'
+import styles from './List.module.scss'
 
 export function List() {
 	const mainRef = useRef<HTMLDivElement>(null)
@@ -29,11 +31,15 @@ export function List() {
 
 	return (
 		<div className={'main'} ref={mainRef}>
-			<div className={'cont'}>
-				<div className={'listHeader'}>
-					<ListNav params={params} items={items} />
+			<div className={styles['listWrap']}>
+				<div className={'cont'}>
+					<div className={styles['listHeader']}>
+						<ListNav params={params} items={items} />
+						<ListSort />
+					</div>
 				</div>
 			</div>
+
 			<Footer />
 		</div>
 	)
