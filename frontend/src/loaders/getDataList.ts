@@ -26,7 +26,9 @@ export async function isTranslit(url: string) {
 	)
 	const wordIsRus = wordIsTranslit.map(el => translitToRus(el))
 
-	return [...wordIsRus, ...wordNotTranslit]
+	return [...wordIsRus, ...wordNotTranslit].sort(function (x, y) {
+		return x == 'sale' ? -1 : y == 'sale' ? 1 : 0
+	})
 }
 
 export async function getItems(params: string[]) {
@@ -37,7 +39,9 @@ export async function getItems(params: string[]) {
 
 function translitToRus(word: string) {
 	const converter = {
+		obuv: 'обувь',
 		bele: 'белье',
+		ashi: 'ащи',
 		yo: 'ё',
 		zh: 'ж',
 		ch: 'ч',

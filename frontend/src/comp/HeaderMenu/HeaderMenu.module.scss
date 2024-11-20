@@ -5,11 +5,12 @@
 	position: fixed;
 	z-index: 2;
 	left: 0;
-	top: 12rem;
+	top: 10.7rem;
+	transition: transform 0.2s ease, opacity 0.2s ease;
 	opacity: 0;
-	transition: top 0.2s ease, opacity 0.2s ease;
+	transform: translateY(1rem);
 }
 .menuWrap_open {
 	opacity: 1;
-	top: 10.7rem;
+	transform: translateY(0rem);
 }

@@ -55,6 +55,7 @@
 	color: $primary-40;
 	transition: color 0.3s ease;
 	line-height: inherit;
+	height: inherit;
 	&::after {
 		height: 0.1rem;
 		margin-top: 0.2rem;
@@ -107,7 +108,7 @@
 	height: 100%;
 }
 .menuNav__li_brand {
-	margin-top: 5.9rem;
+	margin-top: 4.54rem;
 }
 .menuImg__a_sex {
 	height: 100%;

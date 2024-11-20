@@ -1,0 +1,26 @@
+.listNav__ul,
+.listNav__li {
+	display: flex;
+	flex-flow: row nowrap;
+	gap: 10px;
+}
+
+.listNav__span,
+.listNav__link {
+	color: $primary-40;
+}
+.listNav__span {
+	cursor: default;
+}
+.listNav__link {
+	transition: color 0.3s ease;
+	&::first-letter {
+		text-transform: uppercase;
+	}
+	&:hover {
+		color: black;
+	}
+}
+.listNav__link_active {
+	color: black;
+}
