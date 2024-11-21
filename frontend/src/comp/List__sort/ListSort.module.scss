@@ -2,25 +2,28 @@
 	display: flex;
 	flex-flow: row nowrap;
 	gap: 1.5rem;
+	position: absolute;
+	right: 0;
+	z-index: 2;
 }
 .listSort__ul {
-	border: 1px solid $primary-10;
+	border: 1px solid $primary-20;
 	border-radius: 0.4rem;
-	height: 3.2rem;
 	overflow: hidden;
-}
-.listSort__ul_length {
-	max-height: 12.8rem;
-}
-.listSort__ul_sort {
-	max-height: 19.2rem;
+	background: white;
+	height: 3.2rem;
 }
 .listSort__ul_active {
 	transition: height 0.25s ease;
-	height: 100%;
 	.listSort__img {
-		transform: rotate(-180deg);
+		transform: rotate(90deg);
 	}
+}
+.listSort__ul_length.listSort__ul_active {
+	height: 12.8rem;
+}
+.listSort__ul_sort.listSort__ul_active {
+	height: 19.2rem;
 }
 .listSort__li {
 	display: flex;
@@ -32,12 +35,12 @@
 	font-size: 1.2rem;
 	padding: 0 0.8rem;
 	cursor: pointer;
-	border-bottom: 1px solid $primary-10;
+	border-bottom: 1px solid $primary-20;
 	user-select: none;
 	background-color: white;
 	transition: background-color 0.3s ease;
 	&:hover {
-		background-color: $primary-5;
+		background-color: $primary-10;
 	}
 }
 .listSort__li:first-child {
@@ -51,9 +54,10 @@
 	border-bottom: none;
 }
 .listSort__li_active {
-	background-color: $primary-5;
+	background-color: $primary-10;
 }
 .listSort__img {
 	width: 1rem;
 	transition: transform 0.25s ease;
+	transform: rotate(270deg);
 }

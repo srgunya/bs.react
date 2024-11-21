@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Footer } from '../../comp/Footer/Footer'
 import { itemData } from '../../comp/Index__slider_item/IndexSliderItem.props'
+import { ListFilter } from '../../comp/List__filter/ListFilter'
+import { ListItems } from '../../comp/List__items/ListItems'
 import { ListNav } from '../../comp/List__nav/ListNav'
 import { ListSort } from '../../comp/List__sort/ListSort'
 import { pageIsLoad } from '../../helpers/pageIsLoad'
@@ -37,9 +39,12 @@ export function List() {
 						<ListNav params={params} items={items} />
 						<ListSort />
 					</div>
+					<div className={styles['catalog']}>
+						<ListFilter />
+						<ListItems items={items} />
+					</div>
 				</div>
 			</div>
-
 			<Footer />
 		</div>
 	)

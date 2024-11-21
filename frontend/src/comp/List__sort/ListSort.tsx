@@ -59,7 +59,7 @@ export function ListSort() {
 				ref={lengthRef}
 			>
 				<li className={styles['listSort__li']}>
-					{length} <img src='/img/sort/down.png' alt='' className={styles['listSort__img']} />
+					{length} <img src='/img/slider/arrow.png' alt='' className={styles['listSort__img']} />
 				</li>
 				<li className={cn(styles['listSort__li'], styles['listSort__li_active'])}>
 					Показывать: 20
@@ -81,7 +81,7 @@ export function ListSort() {
 				ref={sortRef}
 			>
 				<li className={styles['listSort__li']}>
-					{sort} <img src='/img/sort/down.png' alt='' className={styles['listSort__img']} />
+					{sort} <img src='/img/slider/arrow.png' alt='' className={styles['listSort__img']} />
 				</li>
 				<li className={cn(styles['listSort__li'], styles['listSort__li_active'])}>По умолчанию</li>
 				<li className={styles['listSort__li']}>По возрастанию цены</li>

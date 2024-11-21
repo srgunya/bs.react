@@ -11,6 +11,9 @@
 		.indexSlider__img {
 			filter: brightness(95%);
 		}
+		.itemIcon {
+			opacity: 1;
+		}
 	}
 }
 .indexSlider__link {
@@ -42,6 +45,50 @@
 	height: 3.2rem;
 	line-height: 1.6rem;
 }
-.indexSlider__model {
-	margin-bottom: 1.2rem;
+.item__price {
+	height: 3.62rem;
+	display: flex;
+	align-items: end;
+	justify-content: center;
+}
+.itemSale {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+}
+.itemSale__block {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+.itemSale__price {
+	text-decoration: line-through;
+	color: $primary-40;
+}
+.itemSale__percent {
+	margin-left: 0.4rem;
+}
+.itemSale__sale {
+	margin-top: 0.4rem;
+	color: $red;
+}
+.itemIcon {
+	position: absolute;
+	display: flex;
+	flex-flow: column;
+	top: 1.3rem;
+	right: 1.3rem;
+	gap: 1rem;
+	opacity: 0;
+	transition: opacity 0.2s ease;
+}
+.itemIcon__icon {
+	width: 2.4rem;
+	height: 2.4rem;
+	opacity: 0.4;
+	transition: opacity 0.2s ease;
+	z-index: 2;
+	&:hover {
+		opacity: 1;
+	}
 }

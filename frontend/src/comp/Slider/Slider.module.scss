@@ -42,6 +42,9 @@
 	align-items: center;
 	cursor: pointer;
 }
+.sliderNav__next {
+	transform: rotate(180deg);
+}
 .sliderNav__button_disabled {
 	.sliderNav__img {
 		opacity: 0.2;
