@@ -10,8 +10,8 @@ export function IndexSliderLogo({ logos, name }: IndexSliderLogoProps) {
 		return logos.map(el => (
 			<SwiperSlide key={el.id} className={styles['indexSlider__slide']}>
 				<Link to=''>
-					<picture className={styles['indexSlider__img']}>
-						<img src={PREFIX + el.logo} alt='' className={styles['indexSlider__img']} />
+					<picture className={styles['indexSlider__pic'] + ' wrap_tr'}>
+						<img src={PREFIX + el.logo} alt='' className={styles['indexSlider__img'] + ' img_tr'} />
 					</picture>
 				</Link>
 			</SwiperSlide>

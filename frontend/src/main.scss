@@ -16,15 +16,34 @@ li {
 a {
 	text-decoration: none;
 }
-.main {
-	opacity: 0;
-	transition: opacity 0.3s ease;
-}
-.main_isLoad {
-	opacity: 1;
-}
 .cont {
 	padding: 13.1rem 4.2rem 7rem;
 	max-width: 148.8rem;
 	margin: 0 auto;
+}
+.main {
+	opacity: 0;
+}
+.main_isLoad {
+	opacity: 1;
+}
+.wrap_tr {
+	display: block;
+	position: relative;
+}
+.img_tr {
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0;
+}
+.footer__img {
+	opacity: 0;
+}
+.lazy__img {
+	.img_tr,
+	.footer__img {
+		transition: opacity 0.3s ease;
+		opacity: 1;
+	}
 }

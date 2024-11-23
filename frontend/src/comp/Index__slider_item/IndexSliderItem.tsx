@@ -10,8 +10,8 @@ export function IndexSliderItem({ items, name }: IndexSliderItemProps) {
 		return items.map(el => (
 			<SwiperSlide key={el.id} className={styles['indexSlider__slide']}>
 				<Link to='' className={styles['indexSlider__link']}>
-					<picture>
-						<img src={PREFIX + el.img} alt='' className={styles['indexSlider__img']} />
+					<picture className={styles['indexSlider__pic'] + ' wrap_tr'}>
+						<img src={PREFIX + el.img} alt='' className={styles['indexSlider__img'] + ' img_tr'} />
 					</picture>
 					<span className={styles['indexSlider__brand']}>{el.brand}</span>
 					<span className={styles['indexSlider__type']}>{el.type}</span>
@@ -21,6 +21,7 @@ export function IndexSliderItem({ items, name }: IndexSliderItemProps) {
 						<img src='/img/item/star.png' alt='' className={styles['itemIcon__icon']} />
 						<img src='/img/item/lupa.png' alt='' className={styles['itemIcon__icon']} />
 					</div>
+					<div className={styles['itemIcon__shadow']}></div>
 				</Link>
 			</SwiperSlide>
 		))

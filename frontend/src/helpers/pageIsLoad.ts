@@ -4,6 +4,7 @@ export function pageIsLoad(mainRef: React.RefObject<HTMLDivElement>) {
 	}, 50)
 	setTimeout(() => {
 		mainRef.current?.classList.add('main_isLoad')
+		mainRef.current?.classList.add('lazy__img')
 		sessionStorage.removeItem('scrollPos')
 	}, 100)
 	window.onbeforeunload = () => {

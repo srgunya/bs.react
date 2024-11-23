@@ -12,8 +12,8 @@ export function IndexSex() {
 		<div className={styles['indexSex']}>
 			{index_sex.map((el, i) => (
 				<Link to={el.to} className={styles['indexSex__link']} key={i}>
-					<picture className={styles['indexSex__img']}>
-						<img src={el.img} alt='' className={styles['indexSex__img']} />
+					<picture className={styles['indexSex__pic'] + ' wrap_tr'}>
+						<img src={el.img} alt='' className={styles['indexSex__img'] + ' img_tr'} />
 					</picture>
 					<div className={styles['indexSex__block']}>
 						<span className={styles['indexSex__span']}>{el.text}</span>

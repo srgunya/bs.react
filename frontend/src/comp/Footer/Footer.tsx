@@ -56,7 +56,7 @@ export function Footer() {
 					{icons.map((el, i) => (
 						<li key={i}>
 							<picture className={styles['footerIcons__img']}>
-								<img src={el.img} alt='' className={styles['footerIcons__img']} />
+								<img src={el.img} alt='' className={styles['footerIcons__img'] + ' footer__img'} />
 							</picture>
 						</li>
 					))}

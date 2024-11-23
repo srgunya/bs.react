@@ -1,6 +1,7 @@
 import cn from 'classnames'
-import { ReactNode, useEffect, useRef } from 'react'
+import { ReactNode, useContext, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { HeaderContext } from '../../context/header.context'
 import { PREFIX } from '../../helpers/API'
 import styles from './HeaderMenuBlock.module.scss'
 import { HeaderMenuBlockProps } from './HeaderMenuBlock.props'
@@ -15,6 +16,7 @@ export function HeaderMenuBlock({
 	menuActive,
 }: HeaderMenuBlockProps) {
 	const menuNav = useRef<HTMLDivElement>(null)
+	const { setMenuActive } = useContext(HeaderContext)
 
 	useEffect(() => {
 		let timerId: number
@@ -48,6 +50,9 @@ export function HeaderMenuBlock({
 							className={cn(styles['menuNav__a'], {
 								[styles['menuNav__a_capital']]: arr.length === 14 && i === 0,
 							})}
+							onClick={() => {
+								setMenuActive('')
+							}}
 						>
 							{el.text}
 						</Link>
@@ -65,6 +70,9 @@ export function HeaderMenuBlock({
 					[styles['menuImg__a_brand']]: apperance === 'Бренды',
 					[styles['menuImg__a_sex']]: apperance === 'Мужское' || apperance === 'Женское',
 				})}
+				onClick={() => {
+					setMenuActive('')
+				}}
 			>
 				<picture className={styles['menuImg__img']}>
 					<img src={PREFIX + i.img} className={styles['menuImg__img']} />

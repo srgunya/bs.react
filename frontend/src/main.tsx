@@ -5,6 +5,7 @@ import { createBrowserRouter, defer, RouterProvider } from 'react-router-dom'
 import { itemData } from './comp/Index__slider_item/IndexSliderItem.props'
 import { logoData } from './comp/Index__slider_logo/IndexSliderLogo.props'
 import { Layout } from './layout/Layout/Layout'
+import { getItems, isTranslit } from './loaders/getDataList'
 import { getDataSlider } from './loaders/getDataSlider'
 import './main.scss'
 import { Brandlist } from './pages/BrandList/BrandList'
@@ -34,6 +35,16 @@ const router = createBrowserRouter([
 			{
 				path: '*',
 				element: <List />,
+				loader: async params => {
+					return defer({
+						params: await isTranslit(
+							typeof params.params['*'] == 'string' ? params.params['*'] : ''
+						),
+						items: await getItems(
+							await isTranslit(typeof params.params['*'] == 'string' ? params.params['*'] : '')
+						),
+					})
+				},
 			},
 		],
 	},

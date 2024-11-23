@@ -5,12 +5,8 @@
 	user-select: none;
 	background-color: $product-card-bg;
 	border-radius: 0.4rem;
-	transition: background-color 0.3s ease;
 	&:hover {
-		background-color: $primary-10;
-		.indexSlider__img {
-			filter: brightness(95%);
-		}
+		.itemIcon__shadow,
 		.itemIcon {
 			opacity: 1;
 		}
@@ -20,12 +16,15 @@
 	display: flex;
 	flex-flow: column nowrap;
 	padding: 3.6rem 0.8rem 2.4rem;
+	position: relative;
+}
+.indexSlider__pic {
+	padding-top: 100%;
+	margin-bottom: 1.8rem;
 }
 .indexSlider__img {
 	display: block;
 	width: 100%;
-	margin-bottom: 1.8rem;
-	transition: filter 0.3s ease;
 }
 .indexSlider__brand,
 .indexSlider__type,
@@ -91,4 +90,14 @@
 	&:hover {
 		opacity: 1;
 	}
+}
+.itemIcon__shadow {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: $primary-5;
+	opacity: 0;
+	transition: opacity 0.3s ease;
 }

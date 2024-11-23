@@ -15,8 +15,13 @@ export function IndexInfo() {
 					key={i}
 				>
 					<Link to={el.to} className={styles['IndexInfo__link']}>
-						<picture className={styles['IndexInfo__img']}>
-							<img src={PREFIX + el.img} alt='' className={styles['IndexInfo__img']} />
+						<picture
+							className={cn('wrap_tr', {
+								[styles['IndexInfo__pic_big']]: i == 0,
+								[styles['IndexInfo__pic_smal']]: i != 0,
+							})}
+						>
+							<img src={PREFIX + el.img} alt='' className={styles['IndexInfo__img'] + ' img_tr'} />
 						</picture>
 					</Link>
 					<div className={styles['IndexInfo__block']}>

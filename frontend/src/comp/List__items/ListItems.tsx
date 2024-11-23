@@ -10,8 +10,8 @@ export function ListItems({ items }: ListItemsProps) {
 		return items.map(el => (
 			<Link to='' className={styles['item__link']} key={el.id}>
 				<div className={styles['item__cont']}>
-					<picture>
-						<img src={PREFIX + el.img} alt='' className={styles['item__img']} />
+					<picture className={styles['item__pic']}>
+						<img src={PREFIX + el.img} alt='' className={styles['item__img'] + ' img_tr'} />
 					</picture>
 					<span className={styles['item__brand']}>{el.brand}</span>
 					<span className={styles['item__type']}>{el.type}</span>

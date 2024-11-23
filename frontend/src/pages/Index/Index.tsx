@@ -1,5 +1,5 @@
-import { Suspense, useEffect, useRef } from 'react'
-import { Await, useLoaderData } from 'react-router-dom'
+import { Suspense, useEffect, useLayoutEffect, useRef } from 'react'
+import { Await, useLoaderData, useLocation } from 'react-router-dom'
 import { Footer } from '../../comp/Footer/Footer'
 import { IndexBanner } from '../../comp/Index__banner/IndexBanner'
 import { IndexInfo } from '../../comp/Index__info/IndexInfo'
@@ -12,6 +12,7 @@ import { pageIsLoad } from '../../helpers/pageIsLoad'
 
 export function Index() {
 	const mainRef = useRef<HTMLDivElement>(null)
+	const location = useLocation()
 	const { logos, news, pop } = useLoaderData() as {
 		logos: logoData[]
 		news: itemData[]
@@ -20,7 +21,11 @@ export function Index() {
 
 	useEffect(() => {
 		pageIsLoad(mainRef)
-	}, [])
+	}, [location])
+
+	useLayoutEffect(() => {
+		mainRef.current?.classList.remove('lazy__img')
+	}, [location])
 
 	return (
 		<Suspense>
