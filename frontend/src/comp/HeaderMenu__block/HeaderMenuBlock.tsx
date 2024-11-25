@@ -3,6 +3,7 @@ import { ReactNode, useContext, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { HeaderContext } from '../../context/header.context'
 import { PREFIX } from '../../helpers/API'
+import { sortHeader } from '../../helpers/sort'
 import styles from './HeaderMenuBlock.module.scss'
 import { HeaderMenuBlockProps } from './HeaderMenuBlock.props'
 
@@ -88,10 +89,10 @@ export function HeaderMenuBlock({
 					[styles['menuNav_brand']]: apperance === 'Бренды',
 				})}
 			>
-				{createUl(ul1)}
-				{createUl(ul2)}
-				{ul3 && createUl(ul3)}
-				{ul4 && createUl(ul4)}
+				{createUl(sortHeader(ul1))}
+				{createUl(sortHeader(ul2))}
+				{ul3 && createUl(sortHeader(ul3))}
+				{ul4 && createUl(sortHeader(ul4))}
 			</div>
 			<div
 				className={cn(styles['menuImg'], {

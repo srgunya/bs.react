@@ -49,6 +49,7 @@ async function getList(req, res) {
 					],
 				},
 			},
+			sort: [{ class: { order: 'desc' } }, { category: { order: 'asc' } }],
 		})
 	} else if (req.params['props'] == 'new') {
 		result = await client.search({
@@ -57,6 +58,7 @@ async function getList(req, res) {
 			query: {
 				match_all: {},
 			},
+			sort: [{ class: { order: 'desc' } }, { category: { order: 'asc' } }],
 		})
 	} else if (req.params['props'] == 'sale') {
 		result = await client.search({
@@ -69,6 +71,7 @@ async function getList(req, res) {
 					},
 				},
 			},
+			sort: [{ class: { order: 'desc' } }, { category: { order: 'asc' } }],
 		})
 	} else {
 		result = await client.search({
@@ -98,6 +101,7 @@ async function getList(req, res) {
 					],
 				},
 			},
+			sort: [{ class: { order: 'desc' } }, { category: { order: 'asc' } }],
 		})
 	}
 	result = result.hits.hits.map(el => el._source)

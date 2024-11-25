@@ -86,8 +86,6 @@ export function ListSort() {
 				<li className={cn(styles['listSort__li'], styles['listSort__li_active'])}>По умолчанию</li>
 				<li className={styles['listSort__li']}>По возрастанию цены</li>
 				<li className={styles['listSort__li']}>По убыванию цены</li>
-				<li className={styles['listSort__li']}>Сначала старые товары</li>
-				<li className={styles['listSort__li']}>Сначала новые товары</li>
 			</ul>
 		</div>
 	)

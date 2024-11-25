@@ -16,16 +16,10 @@ li {
 a {
 	text-decoration: none;
 }
-.cont {
+.main {
 	padding: 13.1rem 4.2rem 7rem;
 	max-width: 148.8rem;
 	margin: 0 auto;
-}
-.main {
-	opacity: 0;
-}
-.main_isLoad {
-	opacity: 1;
 }
 .wrap_tr {
 	display: block;
@@ -37,12 +31,8 @@ a {
 	top: 0;
 	opacity: 0;
 }
-.footer__img {
-	opacity: 0;
-}
 .lazy__img {
-	.img_tr,
-	.footer__img {
+	.img_tr {
 		transition: opacity 0.3s ease;
 		opacity: 1;
 	}

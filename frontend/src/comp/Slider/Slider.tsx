@@ -31,7 +31,7 @@ export function Slider({ className, children, slidesPerView, slidesPerGroup, nam
 			>
 				<div className={styles['sliderNav__name']}>{name}</div>
 				<div className={styles['sliderNav__pagi']}></div>
-				<button className={styles['sliderNav__prev']}>
+				<button className={cn(styles['sliderNav__prev'], styles['sliderNav__button_disabled'])}>
 					<img src='/img/slider/arrow.png' alt='' className={styles['sliderNav__img']} />
 				</button>
 				<button className={styles['sliderNav__next']}>

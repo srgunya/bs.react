@@ -1,12 +1,11 @@
 import { Suspense, useEffect, useLayoutEffect, useRef } from 'react'
 import { Await, useLoaderData, useLocation } from 'react-router-dom'
-import { Footer } from '../../comp/Footer/Footer'
 import { itemData } from '../../comp/Index__slider_item/IndexSliderItem.props'
 import { ListFilter } from '../../comp/List__filter/ListFilter'
 import { ListItems } from '../../comp/List__items/ListItems'
 import { ListNav } from '../../comp/List__nav/ListNav'
 import { ListSort } from '../../comp/List__sort/ListSort'
-import { pageIsLoad } from '../../helpers/pageIsLoad'
+import { pageIsLoad, pageRefresh } from '../../helpers/pageIsLoad'
 import styles from './List.module.scss'
 
 export function List() {
@@ -22,8 +21,7 @@ export function List() {
 	}, [location])
 
 	useLayoutEffect(() => {
-		mainRef.current?.classList.remove('lazy__img')
-		window.scrollTo(0, 0)
+		pageRefresh(mainRef)
 	}, [location])
 
 	return (
@@ -31,20 +29,17 @@ export function List() {
 			<Await resolve={{ params, items }}>
 				{({ params, items }: { params: string[]; items: itemData[] }) => {
 					return (
-						<div className={styles['listWrap']}>
+						<div className={styles['list_background']}>
 							<div className={'main'} ref={mainRef}>
-								<div className={'cont'}>
-									<div className={styles['listHeader']}>
-										<ListNav params={params} items={items} />
-										<ListSort />
-									</div>
-									<div className={styles['catalog']}>
-										<ListFilter />
-										<ListItems items={items} />
-									</div>
+								<div className={styles['listHeader']}>
+									<ListNav params={params} items={items} />
+									<ListSort />
+								</div>
+								<div className={styles['catalog']}>
+									<ListFilter />
+									<ListItems items={items} />
 								</div>
 							</div>
-							<Footer />
 						</div>
 					)
 				}}

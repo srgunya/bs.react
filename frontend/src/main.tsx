@@ -37,9 +37,13 @@ const router = createBrowserRouter([
 				element: <List />,
 				loader: async params => {
 					return defer({
-						params: await isTranslit(
-							typeof params.params['*'] == 'string' ? params.params['*'] : ''
-						),
+						params: await new Promise(resolve => {
+							setTimeout(() => {
+								isTranslit(typeof params.params['*'] == 'string' ? params.params['*'] : '').then(
+									data => resolve(data)
+								)
+							}, 300)
+						}),
 						items: await getItems(
 							await isTranslit(typeof params.params['*'] == 'string' ? params.params['*'] : '')
 						),
