@@ -1,5 +1,5 @@
 export interface ListPaginationProps {
 	pagination: string
-	page: number
+	searchParams: { page: number; limit: number }
 	loadMoreData: () => void
 }

@@ -1,36 +1,33 @@
 import cn from 'classnames'
-import React, { MouseEvent, useRef, useState } from 'react'
+import { MouseEvent, useRef } from 'react'
 import styles from './ListSort.module.scss'
+import { ListSortProps } from './ListSort.props'
 
-export function ListSort() {
-	const [length, setLength] = useState('Показывать: 20')
-	const [sort, setSort] = useState('Сортировка')
+export function ListSort({ limit, setLimit }: ListSortProps) {
 	const lengthRef = useRef<HTMLUListElement>(null)
 	const sortRef = useRef<HTMLUListElement>(null)
 
-	function click(
-		e: MouseEvent,
-		ref: HTMLUListElement | null,
-		setState: React.Dispatch<React.SetStateAction<string>>
-	) {
+	function click(e: MouseEvent, ref: HTMLUListElement | null) {
 		if (
-			e.target instanceof Element &&
+			e.target instanceof HTMLLIElement &&
 			e.target.parentNode instanceof Element &&
-			e.target.textContent
+			e.target.dataset.limit
 		) {
-			setState(e.target.textContent)
-
 			if (e.target == e.target.parentNode.childNodes[0]) {
 				ref?.classList.toggle(styles['listSort__ul_active'])
 				return
 			}
-
-			e.target.parentNode.childNodes.forEach(el => {
-				if (el instanceof Element) {
-					el.classList.remove(styles['listSort__li_active'])
-				}
-			})
-			e.target.classList.add(styles['listSort__li_active'])
+			if (e.target.classList.contains(styles['listSort__li_active'])) {
+				return
+			}
+			const url = new URL(window.location.href)
+			url.searchParams.delete('page')
+			url.searchParams.set('limit', e.target.dataset.limit)
+			if (url.searchParams.get('limit') == '20') {
+				url.searchParams.delete('limit')
+			}
+			history.pushState(null, '', url.toString())
+			setLimit(Number(e.target.dataset.limit))
 		}
 	}
 
@@ -48,7 +45,7 @@ export function ListSort() {
 			<ul
 				className={cn(styles['listSort__ul'], styles['listSort__ul_length'])}
 				onClick={e => {
-					click(e, lengthRef.current, setLength)
+					click(e, lengthRef.current)
 				}}
 				onMouseEnter={() => {
 					open(lengthRef.current)
@@ -59,18 +56,38 @@ export function ListSort() {
 				ref={lengthRef}
 			>
 				<li className={styles['listSort__li']}>
-					{length} <img src='/img/slider/arrow.png' alt='' className={styles['listSort__img']} />
+					Показывать: {limit}{' '}
+					<img src='/img/slider/arrow.png' alt='' className={styles['listSort__img']} />
 				</li>
-				<li className={cn(styles['listSort__li'], styles['listSort__li_active'])}>
+				<li
+					className={cn(styles['listSort__li'], {
+						[styles['listSort__li_active']]: limit == 20,
+					})}
+					data-limit='20'
+				>
 					Показывать: 20
 				</li>
-				<li className={styles['listSort__li']}>Показывать: 40</li>
-				<li className={styles['listSort__li']}>Показывать: 80</li>
+				<li
+					className={cn(styles['listSort__li'], {
+						[styles['listSort__li_active']]: limit == 40,
+					})}
+					data-limit='40'
+				>
+					Показывать: 40
+				</li>
+				<li
+					className={cn(styles['listSort__li'], {
+						[styles['listSort__li_active']]: limit == 80,
+					})}
+					data-limit='80'
+				>
+					Показывать: 80
+				</li>
 			</ul>
 			<ul
 				className={cn(styles['listSort__ul'], styles['listSort__ul_sort'])}
 				onClick={e => {
-					click(e, sortRef.current, setSort)
+					click(e, sortRef.current)
 				}}
 				onMouseEnter={() => {
 					open(sortRef.current)
@@ -81,7 +98,7 @@ export function ListSort() {
 				ref={sortRef}
 			>
 				<li className={styles['listSort__li']}>
-					{sort} <img src='/img/slider/arrow.png' alt='' className={styles['listSort__img']} />
+					Сортировка: <img src='/img/slider/arrow.png' alt='' className={styles['listSort__img']} />
 				</li>
 				<li className={cn(styles['listSort__li'], styles['listSort__li_active'])}>По умолчанию</li>
 				<li className={styles['listSort__li']}>По возрастанию цены</li>

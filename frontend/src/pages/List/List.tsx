@@ -11,36 +11,54 @@ import { getItems } from '../../loaders/getDataList'
 import styles from './List.module.scss'
 
 export function List() {
-	const { params, items, pagination, page } = useLoaderData() as {
+	const { params, items, pagination, page, limit } = useLoaderData() as {
 		params: string[]
 		items: itemData[]
 		pagination: string
 		page: number
+		limit: number
 	}
 	const [search] = useSearchParams()
 	const mainRef = useLoadPage(search)
 	const [itemsData, setItemsData] = useState(items)
-	const [activePage, setActivePage] = useState(page)
 	const [more, setMore] = useState<itemData[]>([])
+	const [searchParams, setSearchParams] = useState({ page: page, limit: limit })
 
 	useLayoutEffect(() => {
 		mainRef.current?.classList.remove('list_loading')
 		window.scrollTo(0, 0)
-		setActivePage(page)
+		setSearchParams({ page: page, limit: limit })
 		setMore([])
 		setItemsData(items)
-	}, [params, items, pagination, page, mainRef])
+	}, [params, items, pagination, page, limit, mainRef])
 
 	async function loadMoreData() {
 		mainRef.current?.classList.add('list_loading')
 		await new Promise(resolve => {
 			setTimeout(() => {
-				getItems(params, activePage + 1).then(data => {
+				getItems(params, searchParams.page + 1, searchParams.limit).then(data => {
 					if (more.length > 0) {
 						setItemsData(state => [...state, ...more])
 					}
 					setMore(data)
-					setActivePage(state => state + 1)
+					setSearchParams(state => ({ ...state, page: state.page + 1 }))
+					setTimeout(() => {
+						mainRef.current?.classList.remove('list_loading')
+					}, 1)
+					resolve(data)
+				})
+			}, 300)
+		})
+	}
+
+	async function setLimit(limit: number) {
+		mainRef.current?.classList.add('list_loading')
+		await new Promise(resolve => {
+			setTimeout(() => {
+				getItems(params, 1, limit).then(data => {
+					setItemsData(data)
+					setMore([])
+					setSearchParams({ page: 1, limit: limit })
 					setTimeout(() => {
 						mainRef.current?.classList.remove('list_loading')
 					}, 1)
@@ -67,14 +85,14 @@ export function List() {
 							<div className={'main'} ref={mainRef}>
 								<div className={styles['listHeader']}>
 									<ListNav params={params} items={items} />
-									<ListSort />
+									<ListSort limit={searchParams.limit} setLimit={setLimit} />
 								</div>
 								<div className={styles['catalog']}>
 									<ListFilter />
 									<ListItems items={itemsData} more={more} />
 									<ListPagination
 										pagination={pagination}
-										page={activePage}
+										searchParams={searchParams}
 										loadMoreData={loadMoreData}
 									/>
 								</div>

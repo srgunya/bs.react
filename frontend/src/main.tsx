@@ -45,7 +45,12 @@ const router = createBrowserRouter([
 							  Number(searchParams.get('page')) > 0
 							? Number(searchParams.get('page'))
 							: 1
-
+					const limit =
+						Number(searchParams.get('limit')) == 40
+							? 40
+							: Number(searchParams.get('limit')) == 80
+							? 80
+							: 20
 					return defer({
 						params: await new Promise(resolve => {
 							setTimeout(() => {
@@ -55,9 +60,10 @@ const router = createBrowserRouter([
 								})
 							}, 300)
 						}),
-						items: await getItems(props, page),
+						items: await getItems(props, page, limit),
 						pagination: await pagination(props),
 						page: page,
+						limit: limit,
 					})
 				},
 			},

@@ -31,8 +31,8 @@ export async function isTranslit(url: string) {
 	})
 }
 
-export async function getItems(props: string[], page: number) {
-	const res = await fetch(`${PREFIX}/getList/${props.join(' ')}/${page}`)
+export async function getItems(props: string[], page: number, limit: number) {
+	const res = await fetch(`${PREFIX}/getList/${props.join(' ')}/${page}/${limit}`)
 	const data: itemData[] = await res.json()
 	return data
 }

@@ -1,11 +1,13 @@
 import cn from 'classnames'
 import { MouseEvent, useRef } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import styles from './ListPagination.module.scss'
 import { ListPaginationProps } from './ListPagination.props'
-export function ListPagination({ pagination, page, loadMoreData }: ListPaginationProps) {
+export function ListPagination({ pagination, searchParams, loadMoreData }: ListPaginationProps) {
 	const location = useLocation()
+	const navigate = useNavigate()
 	const activeRef = useRef<HTMLAnchorElement>(null)
+	const { page, limit } = searchParams
 
 	function next() {
 		if (activeRef.current?.nextElementSibling instanceof HTMLAnchorElement) {
@@ -26,28 +28,36 @@ export function ListPagination({ pagination, page, loadMoreData }: ListPaginatio
 			if (e.target.parentNode?.parentNode?.parentNode.classList.contains('list_loading')) {
 				return false
 			} else {
-				history.pushState(null, '', `${location.pathname}?page=${page + 1}`)
+				const url = new URL(window.location.href)
+				url.searchParams.set('page', `${page + 1}`)
+				history.pushState(null, '', url.toString())
 				loadMoreData()
 			}
 		}
 	}
 	function link(e: MouseEvent) {
+		e.preventDefault()
 		if (
 			e.target instanceof Element &&
-			e.target.parentNode?.parentNode?.parentNode?.parentNode instanceof Element
+			e.target.parentNode?.parentNode?.parentNode?.parentNode instanceof Element &&
+			e.target.textContent
 		) {
 			if (
-				e.target.parentNode?.parentNode?.parentNode?.parentNode.classList.contains('list_loading')
+				!e.target.parentNode?.parentNode?.parentNode?.parentNode.classList.contains('list_loading')
 			) {
-				e.preventDefault()
-			} else {
 				e.target.parentNode?.parentNode?.parentNode?.parentNode.classList.add('list_loading')
+				const url = new URL(window.location.href)
+				url.searchParams.set('page', e.target.textContent)
+				if (url.searchParams.get('page') == '1') {
+					url.searchParams.delete('page')
+				}
+				navigate(location.pathname + '?' + url.searchParams.toString())
 			}
 		}
 	}
 
 	function createPagination() {
-		const length = Math.ceil(Number(pagination) / 20)
+		const length = Math.ceil(Number(pagination) / limit)
 		const pagi: number[] = []
 		for (let i = 1; i <= length; i++) {
 			pagi.push(i)
@@ -90,7 +100,7 @@ export function ListPagination({ pagination, page, loadMoreData }: ListPaginatio
 					</button>
 					{pagi.map(el => (
 						<Link
-							to={el == 1 ? `${location.pathname}` : `${location.pathname}?page=${el}`}
+							to='/'
 							onClick={link}
 							className={cn(styles['pagination__link'], {
 								[styles['pagination__link_active']]: el == page,

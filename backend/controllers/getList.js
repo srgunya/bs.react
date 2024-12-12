@@ -3,10 +3,8 @@ const client = require('./elk')
 async function getList(req, res) {
 	let result
 	let unisex = ''
-	let skip = req.params['page'] == 0 ? 0 : 20 * (Number(req.params['page']) - 1)
-	let size = 20
-	size = skip > 10000 ? 0 : size
-	skip = skip > 10000 ? 0 : skip
+	let size = req.params['page'] > 100 ? 0 : req.params['limit']
+	let skip = req.params['page'] > 100 ? 0 : size * (Number(req.params['page']) - 1)
 	if (req.params['props'].includes('мужское') || req.params['props'].includes('женское')) {
 		unisex = req.params['props'].replace('мужское', 'унисекс').replace('женское', 'унисекс')
 	}
