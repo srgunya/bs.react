@@ -1,18 +1,32 @@
 import cn from 'classnames'
-import { MouseEvent, useRef } from 'react'
+import { MouseEvent, useLayoutEffect, useRef, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import styles from './ListSort.module.scss'
 import { ListSortProps } from './ListSort.props'
 
-export function ListSort({ limit, setLimit }: ListSortProps) {
+export function ListSort({ limit, sort, reRender }: ListSortProps) {
 	const lengthRef = useRef<HTMLUListElement>(null)
 	const sortRef = useRef<HTMLUListElement>(null)
+	const firstRender = useRef(true)
+	const location = useLocation()
+	const [sortState, setSortState] = useState('Сортировка')
+
+	useLayoutEffect(() => {
+		if (firstRender.current) {
+			firstRender.current = false
+		} else {
+			setSortState('Сортировка')
+		}
+	}, [location.pathname])
+
+	useLayoutEffect(() => {
+		setSortState(state => {
+			return state == 'Сортировка' && sort == 'default' ? state : sort
+		})
+	}, [sort])
 
 	function click(e: MouseEvent, ref: HTMLUListElement | null) {
-		if (
-			e.target instanceof HTMLLIElement &&
-			e.target.parentNode instanceof Element &&
-			e.target.dataset.limit
-		) {
+		if (e.target instanceof HTMLLIElement && e.target.parentNode instanceof Element) {
 			if (e.target == e.target.parentNode.childNodes[0]) {
 				ref?.classList.toggle(styles['listSort__ul_active'])
 				return
@@ -20,14 +34,27 @@ export function ListSort({ limit, setLimit }: ListSortProps) {
 			if (e.target.classList.contains(styles['listSort__li_active'])) {
 				return
 			}
-			const url = new URL(window.location.href)
-			url.searchParams.delete('page')
-			url.searchParams.set('limit', e.target.dataset.limit)
-			if (url.searchParams.get('limit') == '20') {
-				url.searchParams.delete('limit')
+			if (e.target.dataset.limit) {
+				const url = new URL(window.location.href)
+				url.searchParams.delete('page')
+				url.searchParams.set('limit', e.target.dataset.limit)
+				if (url.searchParams.get('limit') == '20') {
+					url.searchParams.delete('limit')
+				}
+				history.pushState(null, '', url.toString())
+				reRender(Number(e.target.dataset.limit), sort)
 			}
-			history.pushState(null, '', url.toString())
-			setLimit(Number(e.target.dataset.limit))
+			if (e.target.dataset.sort) {
+				setSortState(e.target.dataset.sort)
+				const url = new URL(window.location.href)
+				url.searchParams.delete('page')
+				url.searchParams.set('sort', e.target.dataset.sort)
+				if (url.searchParams.get('sort') == 'default') {
+					url.searchParams.delete('sort')
+				}
+				history.pushState(null, '', url.toString())
+				reRender(limit, e.target.dataset.sort)
+			}
 		}
 	}
 
@@ -56,7 +83,7 @@ export function ListSort({ limit, setLimit }: ListSortProps) {
 				ref={lengthRef}
 			>
 				<li className={styles['listSort__li']}>
-					Показывать: {limit}{' '}
+					Показывать: {limit}
 					<img src='/img/slider/arrow.png' alt='' className={styles['listSort__img']} />
 				</li>
 				<li
@@ -98,11 +125,36 @@ export function ListSort({ limit, setLimit }: ListSortProps) {
 				ref={sortRef}
 			>
 				<li className={styles['listSort__li']}>
-					Сортировка: <img src='/img/slider/arrow.png' alt='' className={styles['listSort__img']} />
+					{sortState == 'Сортировка' && 'Сортировка'}
+					{sortState == 'default' && 'По умолчанию'}
+					{sortState == 'priceASC' && 'По возрастанию цены'}
+					{sortState == 'priceDESC' && 'По убыванию цены'}
+					<img src='/img/slider/arrow.png' alt='' className={styles['listSort__img']} />
 				</li>
-				<li className={cn(styles['listSort__li'], styles['listSort__li_active'])}>По умолчанию</li>
-				<li className={styles['listSort__li']}>По возрастанию цены</li>
-				<li className={styles['listSort__li']}>По убыванию цены</li>
+				<li
+					className={cn(styles['listSort__li'], {
+						[styles['listSort__li_active']]: sort == 'default',
+					})}
+					data-sort='default'
+				>
+					По умолчанию
+				</li>
+				<li
+					className={cn(styles['listSort__li'], {
+						[styles['listSort__li_active']]: sort == 'priceASC',
+					})}
+					data-sort='priceASC'
+				>
+					По возрастанию цены
+				</li>
+				<li
+					className={cn(styles['listSort__li'], {
+						[styles['listSort__li_active']]: sort == 'priceDESC',
+					})}
+					data-sort='priceDESC'
+				>
+					По убыванию цены
+				</li>
 			</ul>
 		</div>
 	)

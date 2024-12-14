@@ -3,8 +3,29 @@ const client = require('./elk')
 async function getList(req, res) {
 	let result
 	let unisex = ''
-	let size = req.params['page'] > 100 ? 0 : req.params['limit']
-	let skip = req.params['page'] > 100 ? 0 : size * (Number(req.params['page']) - 1)
+	const size = req.params['page'] > 100 ? 0 : req.params['limit']
+	const skip = req.params['page'] > 100 ? 0 : size * (Number(req.params['page']) - 1)
+	const sort =
+		req.params['sort'] == 'priceDESC'
+			? {
+					_script: {
+						script:
+							"doc['sale'].value == 0? doc['price'].value : doc['price'].value - doc['price'].value * doc['sale'].value / 100",
+						type: 'number',
+						order: 'desc',
+					},
+			  }
+			: req.params['sort'] == 'priceASC'
+			? {
+					_script: {
+						script:
+							"doc['sale'].value == 0? doc['price'].value : doc['price'].value - doc['price'].value * doc['sale'].value / 100",
+						type: 'number',
+						order: 'asc',
+					},
+			  }
+			: [{ class: { order: 'desc' } }, { category: { order: 'asc' } }]
+
 	if (req.params['props'].includes('мужское') || req.params['props'].includes('женское')) {
 		unisex = req.params['props'].replace('мужское', 'унисекс').replace('женское', 'унисекс')
 	}
@@ -52,7 +73,7 @@ async function getList(req, res) {
 					],
 				},
 			},
-			sort: [{ class: { order: 'desc' } }, { category: { order: 'asc' } }],
+			sort: sort,
 		})
 	} else if (req.params['props'] == 'new') {
 		result = await client.search({
@@ -62,7 +83,7 @@ async function getList(req, res) {
 			query: {
 				match_all: {},
 			},
-			sort: [{ class: { order: 'desc' } }, { category: { order: 'asc' } }],
+			sort: sort,
 		})
 	} else if (req.params['props'] == 'sale') {
 		result = await client.search({
@@ -76,7 +97,7 @@ async function getList(req, res) {
 					},
 				},
 			},
-			sort: [{ class: { order: 'desc' } }, { category: { order: 'asc' } }],
+			sort: sort,
 		})
 	} else {
 		result = await client.search({
@@ -107,7 +128,7 @@ async function getList(req, res) {
 					],
 				},
 			},
-			sort: [{ class: { order: 'desc' } }, { category: { order: 'asc' } }],
+			sort: sort,
 		})
 	}
 	result = result.hits.hits.map(el => el._source)

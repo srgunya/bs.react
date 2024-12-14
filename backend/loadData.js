@@ -135,10 +135,6 @@ async function createItemIndex() {
 						type: 'keyword',
 						index: false,
 					},
-					sale: {
-						type: 'keyword',
-						index: false,
-					},
 					img: {
 						type: 'keyword',
 						index: false,
@@ -147,8 +143,12 @@ async function createItemIndex() {
 						type: 'keyword',
 						index: false,
 					},
+					sale: {
+						type: 'integer',
+						index: false,
+					},
 					price: {
-						type: 'keyword',
+						type: 'integer',
 						index: false,
 					},
 				},

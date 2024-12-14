@@ -1,4 +1,5 @@
 export interface ListSortProps {
 	limit: number
-	setLimit: (limit: number) => void
+	sort: string
+	reRender: (limit: number, sort: string) => void
 }

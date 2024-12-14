@@ -51,6 +51,13 @@ const router = createBrowserRouter([
 							: Number(searchParams.get('limit')) == 80
 							? 80
 							: 20
+					const sort =
+						searchParams.get('sort') == 'priceASC'
+							? 'priceASC'
+							: searchParams.get('sort') == 'priceDESC'
+							? 'priceDESC'
+							: 'default'
+
 					return defer({
 						params: await new Promise(resolve => {
 							setTimeout(() => {
@@ -60,10 +67,11 @@ const router = createBrowserRouter([
 								})
 							}, 300)
 						}),
-						items: await getItems(props, page, limit),
+						items: await getItems(props, page, limit, sort),
 						pagination: await pagination(props),
 						page: page,
 						limit: limit,
+						sort: sort,
 					})
 				},
 			},
