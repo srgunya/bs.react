@@ -17,7 +17,6 @@
 	cursor: default;
 }
 .listNav__link {
-	transition: color 0.3s ease;
 	&::first-letter {
 		text-transform: uppercase;
 	}
@@ -26,5 +25,6 @@
 	}
 }
 .listNav__link_active {
+	transition: color 0.3s ease;
 	color: black;
 }

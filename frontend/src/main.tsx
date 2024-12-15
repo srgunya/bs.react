@@ -5,7 +5,7 @@ import { createBrowserRouter, defer, RouterProvider } from 'react-router-dom'
 import { itemData } from './comp/Index__slider_item/IndexSliderItem.props'
 import { logoData } from './comp/Index__slider_logo/IndexSliderLogo.props'
 import { Layout } from './layout/Layout/Layout'
-import { getItems, isTranslit, pagination } from './loaders/getDataList'
+import { getFilter, getList, getPagination, getParams } from './loaders/getDataList'
 import { getDataSlider } from './loaders/getDataSlider'
 import './main.scss'
 import { Brandlist } from './pages/BrandList/BrandList'
@@ -61,14 +61,15 @@ const router = createBrowserRouter([
 					return defer({
 						params: await new Promise(resolve => {
 							setTimeout(() => {
-								isTranslit(typeof params['*'] == 'string' ? params['*'] : '').then(data => {
+								getParams(typeof params['*'] == 'string' ? params['*'] : '').then(data => {
 									props = data
 									resolve(data)
 								})
 							}, 300)
 						}),
-						items: await getItems(props, page, limit, sort),
-						pagination: await pagination(props),
+						items: await getList(props, page, limit, sort),
+						filter: await getFilter(props),
+						pagination: await getPagination(props),
 						page: page,
 						limit: limit,
 						sort: sort,
