@@ -144,11 +144,11 @@ async function createItemIndex() {
 						index: false,
 					},
 					sale: {
-						type: 'integer',
+						type: 'float',
 						index: false,
 					},
 					price: {
-						type: 'integer',
+						type: 'float',
 						index: false,
 					},
 				},

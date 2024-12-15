@@ -2,22 +2,24 @@ import { Suspense, useLayoutEffect, useState } from 'react'
 import { Await, useLoaderData, useSearchParams } from 'react-router-dom'
 import { itemData } from '../../comp/Index__slider_item/IndexSliderItem.props'
 import { ListFilter } from '../../comp/List__filter/ListFilter'
+import { filterData } from '../../comp/List__filter/ListFilter.props'
 import { ListItems } from '../../comp/List__items/ListItems'
 import { ListNav } from '../../comp/List__nav/ListNav'
 import { ListPagination } from '../../comp/List__pagination/ListPagination'
 import { ListSort } from '../../comp/List__sort/ListSort'
 import { useLoadPage } from '../../hooks/use-loadPage.hook'
-import { getItems } from '../../loaders/getDataList'
+import { getList } from '../../loaders/getDataList'
 import styles from './List.module.scss'
 
 export function List() {
-	const { params, items, pagination, page, limit, sort } = useLoaderData() as {
+	const { params, items, pagination, page, limit, sort, filter } = useLoaderData() as {
 		params: string[]
 		items: itemData[]
 		pagination: string
 		page: number
 		limit: number
 		sort: string
+		filter: filterData
 	}
 	const [search] = useSearchParams()
 	const mainRef = useLoadPage(search)
@@ -37,19 +39,17 @@ export function List() {
 		mainRef.current?.classList.add('list_loading')
 		await new Promise(resolve => {
 			setTimeout(() => {
-				getItems(params, searchParams.page + 1, searchParams.limit, searchParams.sort).then(
-					data => {
-						if (more.length > 0) {
-							setItemsData(state => [...state, ...more])
-						}
-						setMore(data)
-						setSearchParams(state => ({ ...state, page: state.page + 1 }))
-						setTimeout(() => {
-							mainRef.current?.classList.remove('list_loading')
-						}, 1)
-						resolve(data)
+				getList(params, searchParams.page + 1, searchParams.limit, searchParams.sort).then(data => {
+					if (more.length > 0) {
+						setItemsData(state => [...state, ...more])
 					}
-				)
+					setMore(data)
+					setSearchParams(state => ({ ...state, page: state.page + 1 }))
+					setTimeout(() => {
+						mainRef.current?.classList.remove('list_loading')
+					}, 1)
+					resolve(data)
+				})
 			}, 300)
 		})
 	}
@@ -58,7 +58,7 @@ export function List() {
 		mainRef.current?.classList.add('list_loading')
 		await new Promise(resolve => {
 			setTimeout(() => {
-				getItems(params, 1, limit, sort).then(data => {
+				getList(params, 1, limit, sort).then(data => {
 					setItemsData(data)
 					setMore([])
 					setSearchParams({ page: 1, limit: limit, sort: sort })
@@ -73,21 +73,23 @@ export function List() {
 
 	return (
 		<Suspense>
-			<Await resolve={{ params, items, pagination }}>
+			<Await resolve={{ params, items, pagination, filter }}>
 				{({
 					params,
 					items,
 					pagination,
+					filter,
 				}: {
 					params: string[]
 					items: itemData[]
 					pagination: string
+					filter: filterData
 				}) => {
 					return (
 						<div className={styles['list_background']}>
 							<div className={'main'} ref={mainRef}>
 								<div className={styles['listHeader']}>
-									<ListNav params={params} items={items} />
+									<ListNav params={params} brand={items[0].brand} />
 									<ListSort
 										limit={searchParams.limit}
 										sort={searchParams.sort}
@@ -95,7 +97,7 @@ export function List() {
 									/>
 								</div>
 								<div className={styles['catalog']}>
-									<ListFilter />
+									<ListFilter facets={filter} />
 									<ListItems items={itemsData} more={more} />
 									<ListPagination
 										pagination={pagination}

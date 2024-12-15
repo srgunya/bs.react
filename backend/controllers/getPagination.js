@@ -1,11 +1,11 @@
 const client = require('./elk')
 
-async function pagination(req, res) {
+async function getPagination(req, res) {
 	let result
-	let unisex = ''
-	if (req.params['props'].includes('мужское') || req.params['props'].includes('женское')) {
-		unisex = req.params['props'].replace('мужское', 'унисекс').replace('женское', 'унисекс')
-	}
+	const unisex =
+		req.params['props'].includes('мужское') || req.params['props'].includes('женское')
+			? req.params['props'].replace('мужское', 'унисекс').replace('женское', 'унисекс')
+			: ''
 	if (req.params['props'].includes('sale') && req.params['props'].length > 4) {
 		unisex = unisex.replace('sale', '').trim()
 		const params = req.params['props'].replace('sale', '').trim()
@@ -99,4 +99,4 @@ async function pagination(req, res) {
 	res.send(`${result.count}`)
 }
 
-module.exports = pagination
+module.exports = getPagination
